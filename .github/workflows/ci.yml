@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate repository structure
+        run: |
+          test -f galaxy.yml
+          test -f meta/runtime.yml
+          test -d roles/monitoring
+          test -d roles/reboot
+          test -d roles/backup
+          test -d playbooks
+          test -d tests
+          test -d changelogs/fragments
